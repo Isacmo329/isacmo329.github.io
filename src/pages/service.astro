@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+---
+
+<Base
+  title="サービス"
+  description="まちのAI屋さんのサービス紹介。補助金を活用したAIセミナー、月額制のAI顧問、Web制作・保守の3本柱で、長崎の中小企業のAI活用をサポートします。"
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>サービス</h1>
+      <p>3つのサービスで、AI活用の「はじめる」から「つづける」までを支えます</p>
+    </div>
+  </div>
+
+  <section class="section" id="seminar">
+    <div class="container article">
+      <div class="section-title">
+        <span class="section-title__sub">SERVICE 01</span>
+        <h2>AIセミナー × 補助金活用</h2>
+      </div>
+      <div class="article-body">
+        <p>
+          長崎県のデジタル力向上補助金を活用した、実質負担の少ないAI研修です。対面・ワークショップ形式で、座学だけで終わらせず、その場で実際に手を動かしていただきます。
+        </p>
+        <h3>こんな方におすすめ</h3>
+        <ul>
+          <li>AIに興味はあるが、何から始めればいいかわからない</li>
+          <li>社員にAIの基本を身につけさせたいが、研修費用が気になる</li>
+          <li>自社の業務のどこにAIが使えるのか知りたい</li>
+        </ul>
+        <h3>特徴</h3>
+        <ul>
+          <li>補助金の申請サポート込み（書類作成のお手伝いをします）</li>
+          <li>専門用語を使わない、現場のことばでの研修</li>
+          <li>受講者の業務に合わせたカスタマイズ</li>
+        </ul>
+        <!-- TODO: 補助金の対象要件・上限額など、最新の公募要領を確認して追記 -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="advisor">
+    <div class="container article">
+      <div class="section-title">
+        <span class="section-title__sub">SERVICE 02</span>
+        <h2>AI顧問（月額制）<small>※2027年1月開始予定・先行受付中</small></h2>
+      </div>
+      <div class="article-body">
+        <p>
+          月額制で、いつでもAIのことを相談できる「かかりつけの相談相手」です。セミナーで学んだあと、「これってAIでできる？」と思ったときにすぐ聞ける相手がいることが、AI活用を続ける一番のコツです。
+        </p>
+        <h3>想定しているサポート内容</h3>
+        <ul>
+          <li>チャット・LINEでの随時相談</li>
+          <li>月1回の定例ミーティング（対面またはオンライン）</li>
+          <li>新しいAIツール・活用方法のご提案</li>
+        </ul>
+        <p>
+          現在は準備中ですが、先行のご相談を受け付けています。開始時の優先案内をご希望の方は、LINEまたはフォームからご連絡ください。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="web">
+    <div class="container article">
+      <div class="section-title">
+        <span class="section-title__sub">SERVICE 03</span>
+        <h2>Web制作・保守</h2>
+      </div>
+      <div class="article-body">
+        <p>
+          ホームページの制作から、公開後の更新・運用までをお手伝いします。保守は月額定額制（月額30,000円・税別）なので、「作ったきり放置」になりません。
+        </p>
+        <h3>こんな方におすすめ</h3>
+        <ul>
+          <li>ホームページがない、または10年前に作ったまま</li>
+          <li>更新の仕方がわからず、情報が古いままになっている</li>
+          <li>スマホできれいに見えるサイトにしたい</li>
+        </ul>
+        <h3>特徴</h3>
+        <ul>
+          <li>スマホ対応（レスポンシブ）標準</li>
+          <li>公開後の文言修正・お知らせ更新は保守内で対応</li>
+          <li>制作費は内容により個別お見積り</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+</Base>

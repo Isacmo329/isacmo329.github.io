@@ -1,0 +1,242 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE, CATEGORIES } from '../config';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+
+<Base>
+  <!-- 3-1. ファーストビュー -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <h1>{SITE.catchcopy}</h1>
+        <p>{SITE.subcopy}</p>
+        <div class="hero__cta">
+          <a href={SITE.lineUrl} class="btn btn--line">LINEで無料相談してみる</a>
+          <a href="/contact/" class="btn btn--ghost">フォームはこちら</a>
+        </div>
+        <p class="hero__note">※ 相談は無料。「何を聞けばいいかわからない」段階からどうぞ。</p>
+      </div>
+      <div class="hero__img">
+        <img src="/assets/images/hero.png" alt="長崎の中小企業のAI活用をサポートするまちのAI屋さん" width="1600" height="900" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-2. こんなお悩みありませんか -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">POINT</span>
+        <h2>こんなお悩み、ありませんか？</h2>
+      </div>
+      <div class="points">
+        <div class="point-card">
+          <img src="/assets/images/point-1.png" alt="" width="600" height="600" loading="lazy" />
+          <span class="point-card__label">POINT 1</span>
+          <p class="point-card__q">AIって、何から始めればいいの？</p>
+          <p class="point-card__a">
+            まずは補助金を使ったセミナーで、あなたの業務に直結する使い方から始めましょう。専門用語は使いません。
+          </p>
+        </div>
+        <div class="point-card">
+          <img src="/assets/images/point-2.png" alt="" width="600" height="600" loading="lazy" />
+          <span class="point-card__label">POINT 2</span>
+          <p class="point-card__q">うちみたいな小さな会社でも意味ある？</p>
+          <p class="point-card__a">
+            小さい会社ほど効果が大きいのがAIです。1人で何役もこなしている仕事こそ、AIの出番です。
+          </p>
+        </div>
+        <div class="point-card">
+          <img src="/assets/images/point-3.png" alt="" width="600" height="600" loading="lazy" />
+          <span class="point-card__label">POINT 3</span>
+          <p class="point-card__q">導入したあと、続けられるか不安…</p>
+          <p class="point-card__a">
+            月額のAI顧問サービスで「いつでも聞ける相談相手」になります。導入して終わり、にはしません。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-3. 3つのサービス -->
+  <section class="section section--soft" id="service">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">SERVICE</span>
+        <h2>3つのサービス</h2>
+      </div>
+      <div class="services">
+        <div class="service-card">
+          <img src="/assets/images/service-seminar.png" alt="" width="400" height="400" loading="lazy" />
+          <h3>AIセミナー × 補助金活用</h3>
+          <p>
+            長崎県のデジタル力向上補助金を活用した、実質負担の少ないAI研修。対面・ワークショップ形式で、翌日から使える内容だけをお届けします。
+          </p>
+          <div class="service-card__link">
+            <a href="/service/#seminar" class="btn btn--accent btn--sm">くわしく見る</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <span class="badge">準備中・先行受付</span>
+          <img src="/assets/images/service-advisor.png" alt="" width="400" height="400" loading="lazy" />
+          <h3>AI顧問（月額制）</h3>
+          <p>
+            月額制でいつでも相談できる、AIの「かかりつけ相談相手」。2027年1月開始予定。先行のご相談を受け付けています。
+          </p>
+          <div class="service-card__link">
+            <a href="/service/#advisor" class="btn btn--accent btn--sm">くわしく見る</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="/assets/images/service-web.png" alt="" width="400" height="400" loading="lazy" />
+          <h3>Web制作・保守</h3>
+          <p>
+            ホームページの制作から公開後の運用まで。保守は月額定額制なので、「作って終わり」になりません。
+          </p>
+          <div class="service-card__link">
+            <a href="/service/#web" class="btn btn--accent btn--sm">くわしく見る</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-4. 制作実績・お客様の声 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">WORKS</span>
+        <h2>制作実績・お客様の声</h2>
+      </div>
+      <div class="works">
+        <div class="work-card">
+          <div class="work-card__frame">
+            <img src="/assets/images/works-ohama.png" alt="大濱畳店様 ホームページ" loading="lazy" />
+          </div>
+          <div class="work-card__body">
+            <h3>大濱畳店 様</h3>
+            <!-- TODO: 公開URL確定後にリンク先を設定 -->
+            <a href="#" target="_blank" rel="noopener">サイトを見る →</a>
+            <p class="work-card__voice">
+              <!-- TODO: 掲載許可済みの一言コメントに差し替え -->
+              「（お客様の一言コメントが入ります）」
+            </p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-card__frame">
+            <img src="/assets/images/works-nakahira.png" alt="中平個人タクシー様 ホームページ" loading="lazy" />
+          </div>
+          <div class="work-card__body">
+            <h3>中平個人タクシー 様</h3>
+            <a href="#" target="_blank" rel="noopener">サイトを見る →</a>
+            <p class="work-card__voice">
+              「（お客様の一言コメントが入ります）」
+            </p>
+          </div>
+        </div>
+      </div>
+      <p class="text-center mt-32">
+        <a href="/works/" class="btn btn--ghost btn--sm">実績一覧を見る</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 3-5. 料金の目安 -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">PRICE</span>
+        <h2>料金の目安</h2>
+      </div>
+      <div class="prices">
+        <div class="price-card">
+          <h3>AIセミナー</h3>
+          <p class="price-card__price">補助金活用で<br />実質負担を軽減<small>※要お見積り</small></p>
+          <p>長崎県デジタル力向上補助金の申請サポート込み</p>
+        </div>
+        <div class="price-card">
+          <h3>AI顧問（月額制）</h3>
+          <p class="price-card__price">2027年1月<br />開始予定</p>
+          <p>先行のご相談・お問い合わせを受付中です</p>
+        </div>
+        <div class="price-card">
+          <h3>Web制作・保守</h3>
+          <p class="price-card__price">保守 月額30,000円<small>（税別）</small></p>
+          <p>制作費は内容により個別お見積り</p>
+        </div>
+      </div>
+      <p class="text-center mt-32">
+        <a href="/service/" class="btn btn--ghost btn--sm">サービスの詳細を見る</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 3-6. 代表あいさつ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">GREETING</span>
+        <h2>代表あいさつ</h2>
+      </div>
+      <div class="profile">
+        <div class="profile__photo">
+          <!-- TODO: 代表の実写写真に差し替え（3:4 縦構図推奨） -->
+          <img src="/assets/images/profile.png" alt={`${SITE.name} 代表`} width="600" height="800" loading="lazy" />
+        </div>
+        <div class="profile__body">
+          <h3>{SITE.owner}</h3>
+          <p class="profile__role">まちのAI屋さん 代表｜{SITE.area}</p>
+          <p>
+            はじめまして。「まちのAI屋さん」は、昔の「まちの電器屋さん」のように、困ったときに気軽に声をかけられるAIの相談相手でありたい、という思いで始めました。
+          </p>
+          <p>
+            AIの話は、むずかしい言葉を使わなくても伝えられます。長崎の会社の現場に合わせて、まちのことばでご説明します。
+          </p>
+          <p>
+            <a href="/about/">くわしいプロフィールはこちら →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-7. お知らせ・コラム -->
+  {
+    posts.length > 0 && (
+      <section class="section section--soft">
+        <div class="container">
+          <div class="section-title">
+            <span class="section-title__sub">COLUMN</span>
+            <h2>コラム・お知らせ</h2>
+          </div>
+          <div class="blog-list">
+            {posts.map((post) => (
+              <a href={`/blog/${post.id}/`} class="blog-card">
+                <span class="blog-card__cat">{CATEGORIES[post.data.category]}</span>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+              </a>
+            ))}
+          </div>
+          <p class="text-center mt-32">
+            <a href="/blog/" class="btn btn--ghost btn--sm">コラム一覧を見る</a>
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 3-8. 締めCTA -->
+  <CtaSection />
+</Base>

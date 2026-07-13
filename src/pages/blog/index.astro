@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { CATEGORIES } from '../../config';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+
+<Base
+  title="コラム"
+  description="長崎の中小企業のためのAI活用コラム。ChatGPTなどのAIツールの使い方、補助金情報、導入事例を、専門用語を使わずにお届けします。"
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>コラム</h1>
+      <p>長崎の中小企業のための、やさしいAI活用情報</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-list">
+        {
+          posts.map((post) => (
+            <a href={`/blog/${post.id}/`} class="blog-card">
+              <span class="blog-card__cat">{CATEGORIES[post.data.category]}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+</Base>

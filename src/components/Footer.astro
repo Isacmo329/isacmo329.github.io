@@ -1,0 +1,25 @@
+---
+import { SITE } from '../config';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        まちのAI屋さん
+        <small>長崎の中小企業のAI活用・Web制作の相談相手</small>
+      </div>
+      <nav class="footer__nav" aria-label="フッターナビゲーション">
+        <a href="/service/">サービス</a>
+        <a href="/works/">制作実績</a>
+        <a href="/blog/">コラム</a>
+        <a href="/faq/">よくある質問</a>
+        <a href="/about/">代表について</a>
+        <a href="/contact/">お問い合わせ</a>
+        <a href="/privacy/">プライバシーポリシー</a>
+      </nav>
+    </div>
+    <p class="footer__copy">© {year} {SITE.name}</p>
+  </div>
+</footer>

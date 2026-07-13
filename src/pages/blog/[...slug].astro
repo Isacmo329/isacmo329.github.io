@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { CATEGORIES, SITE } from '../../config';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// 関連記事: 同カテゴリの最新3件（自分自身を除く）
+const related = (await getCollection('blog', ({ data, id }) => !data.draft && id !== post.id))
+  .filter((p) => p.data.category === post.data.category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  author: { '@type': 'Organization', name: SITE.name },
+  publisher: { '@type': 'Organization', name: SITE.name },
+};
+---
+
+<Base title={post.data.title} description={post.data.description} ogImage={post.data.ogImage}>
+  <section class="section">
+    <div class="container article">
+      <header class="article__header">
+        <span class="blog-card__cat">{CATEGORIES[post.data.category]}</span>
+        <h1>{post.data.title}</h1>
+        <p class="article__meta">
+          <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+        </p>
+      </header>
+      <div class="article-body">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="section section--soft">
+        <div class="container">
+          <div class="section-title">
+            <h2>関連記事</h2>
+          </div>
+          <div class="blog-list">
+            {related.map((p) => (
+              <a href={`/blog/${p.id}/`} class="blog-card">
+                <span class="blog-card__cat">{CATEGORIES[p.data.category]}</span>
+                <h3>{p.data.title}</h3>
+                <time datetime={p.data.pubDate.toISOString()}>{fmt(p.data.pubDate)}</time>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+
+  <CtaSection />
+</Base>

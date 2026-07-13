@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+---
+
+<Base
+  title="お問い合わせ"
+  description="まちのAI屋さんへのお問い合わせ。AIの相談・AIセミナー・ホームページ制作のご相談は、LINEまたはフォームからお気軽にどうぞ。相談は無料です。"
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>お問い合わせ</h1>
+      <p>相談は無料です。「何を聞けばいいかわからない」段階からどうぞ</p>
+    </div>
+  </div>
+
+  <!-- 主導線: LINE -->
+  <section class="section">
+    <div class="container text-center">
+      <div class="section-title">
+        <span class="section-title__sub">RECOMMENDED</span>
+        <h2>いちばん気軽なのはLINEです</h2>
+      </div>
+      <p>
+        友だち追加して、ひとこと「AIのこと聞きたい」と送るだけでOK。<br />
+        通常1営業日以内にお返事します。
+      </p>
+      <p class="mt-32">
+        <a href={SITE.lineUrl} class="btn btn--line">LINEで無料相談する</a>
+      </p>
+      <!-- TODO: LINE友だち追加QRコード画像を設置（PC閲覧者向け） -->
+    </div>
+  </section>
+
+  <!-- 補助導線: フォーム -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">FORM</span>
+        <h2>フォームでのお問い合わせ</h2>
+      </div>
+      <form class="form" action={SITE.formspreeEndpoint} method="POST">
+        <label for="name">お名前<span class="req">必須</span></label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
+
+        <label for="company">会社名・屋号</label>
+        <input type="text" id="company" name="company" autocomplete="organization" />
+
+        <label for="email">メールアドレス<span class="req">必須</span></label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+
+        <label for="message">ご相談内容<span class="req">必須</span></label>
+        <textarea id="message" name="message" rows="6" required placeholder="例: AIで何ができるのか、まず話を聞いてみたい"></textarea>
+
+        <button type="submit" class="btn btn--accent">送信する</button>
+      </form>
+      <p class="text-center cta-section__note mt-32">
+        送信いただいた内容は、お問い合わせへの回答のみに使用します。詳しくは<a href="/privacy/">プライバシーポリシー</a>をご覧ください。
+      </p>
+    </div>
+  </section>
+</Base>

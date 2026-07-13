@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const faqs = [
+  {
+    q: 'AIのことが全然わからなくても相談していいですか？',
+    a: 'もちろんです。「何を聞けばいいかわからない」という状態からのご相談が一番多いです。専門用語を使わずにご説明します。',
+  },
+  {
+    q: '相談にお金はかかりますか？',
+    a: '初回のご相談は無料です。LINEまたはお問い合わせフォームからお気軽にどうぞ。しつこい営業は一切しません。',
+  },
+  {
+    q: '補助金は本当に使えますか？',
+    a: '長崎県のデジタル力向上補助金など、対象になる制度の確認から申請書類の作成まで一緒に進めます。要件や公募時期によって使える制度が変わるため、まずは現状をお聞かせください。',
+  },
+  {
+    q: '長崎市外・県外でも対応してもらえますか？',
+    a: '長崎県内は対面で対応します。県外の方もオンラインでご相談いただけます。',
+  },
+  {
+    q: 'ホームページだけ、AIだけ、の相談でも大丈夫ですか？',
+    a: '大丈夫です。どちらか一方のご相談も歓迎です。両方まとめてのご相談ももちろん承ります。',
+  },
+  {
+    q: 'AI顧問はいつから始まりますか？',
+    a: '2027年1月開始予定です。現在は先行のご相談・優先案内のご希望を受け付けています。',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="よくある質問"
+  description="まちのAI屋さんへのよくある質問。AI相談・AIセミナー・補助金活用・ホームページ制作について、はじめての方の疑問にお答えします。"
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>よくある質問</h1>
+      <p>はじめての方からよくいただく質問をまとめました</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container article">
+      {
+        faqs.map((f) => (
+          <div class="faq-item">
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <CtaSection />
+</Base>
