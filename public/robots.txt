@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# TODO: 本番ドメイン確定後に差し替え
-Sitemap: https://machino-ai.example.com/sitemap-index.xml
+# TODO: 独自ドメイン確定後に差し替え
+Sitemap: https://mitsukenn.github.io/sitemap-index.xml

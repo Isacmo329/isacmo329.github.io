@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: 本番ドメイン確定後に差し替える（sitemap・OGP・canonical に使われる）
-  site: 'https://machino-ai.example.com',
+  // TODO: 独自ドメイン確定後に差し替える（sitemap・OGP・canonical に使われる）
+  site: 'https://mitsukenn.github.io',
   integrations: [sitemap()],
 });
