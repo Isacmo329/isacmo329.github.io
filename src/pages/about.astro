@@ -19,19 +19,15 @@ import { SITE } from '../config';
     <div class="container">
       <div class="profile">
         <div class="profile__photo">
-          <!-- TODO: 代表の実写写真に差し替え -->
-          <img src="/assets/images/profile.png" alt={`${SITE.name} 代表`} width="600" height="800" />
+          <img src="/assets/images/profile.png" alt={`${SITE.name} 代表`} width="316" height="421" />
         </div>
         <div class="profile__body">
-          <h3>{SITE.owner}</h3>
+          {SITE.owner && <h3>{SITE.owner}</h3>}
           <p class="profile__role">まちのAI屋さん 代表｜{SITE.area}</p>
           <p>
             まちのAI屋さんは、長崎県長崎市を拠点に、中小企業・個人事業主向けのAI活用支援（AIセミナー・AI顧問）とホームページ制作・保守を行っている事業です。
           </p>
-          <p>
-            <!-- TODO: 経歴・地域活動（JC等は掲載可否を判断のうえ）を追記 -->
-            （代表の経歴・地域とのつながりをここに記載します）
-          </p>
+          <!-- TODO: 経歴・地域活動（JC等は掲載可否を判断のうえ）が確定したら段落を追加 -->
           <p>
             大きな会社のような立派な提案書は作れないかもしれません。そのかわり、顔の見える距離で、長く付き合える相談相手になります。AIのこと、ホームページのこと、まずは世間話くらいの気持ちで聞いてください。
           </p>
@@ -43,7 +39,7 @@ import { SITE } from '../config';
           <h2>事業概要</h2>
           <ul>
             <li>屋号: まちのAI屋さん</li>
-            <li>代表: {SITE.owner}</li>
+            {SITE.owner && <li>代表: {SITE.owner}</li>}
             <li>所在地: {SITE.area}<!-- TODO: 公開する住所表記を決定 --></li>
             <li>事業内容: AIセミナー（補助金活用支援含む）／AI顧問（2027年1月開始予定）／Web制作・保守</li>
             <li>対応エリア: 長崎県内（オンライン対応で県外もご相談可）</li>

@@ -4,9 +4,9 @@
  */
 export const SITE = {
   name: 'まちのAI屋さん',
-  // TODO: キャッチコピー確定後に差し替え（現在は仮）
-  catchcopy: 'AIを、まちのことばで。',
-  subcopy: '長崎の中小企業・個人事業主のAI活用とWeb制作を、地元の相談相手としてサポートします。',
+  // キャッチコピー確定版（2026-07-13）
+  catchcopy: 'めんどうな事務仕事、AIで半分にしませんか。',
+  subcopy: 'AIとホームページの、気軽な相談窓口です。',
   description:
     '長崎でAIの相談・AIセミナー・ホームページ制作なら「まちのAI屋さん」。補助金を活用したAI研修、月額制のAI顧問、Web制作・保守まで、地元の相談相手としてサポートします。',
 
@@ -16,8 +16,8 @@ export const SITE = {
   formspreeEndpoint: 'https://formspree.io/f/XXXXXXXX',
 
   area: '長崎県長崎市',
-  // TODO: 公開前に正式な事業者情報に差し替え
-  owner: '（代表者名）',
+  // TODO: 掲載する代表者名の表記が決まったら設定（空の間は名前を表示しない）
+  owner: '',
 } as const;
 
 export const CATEGORIES = {

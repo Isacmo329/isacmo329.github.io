@@ -10,10 +10,28 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+
+// 制作実績（お客様コメント・URLは取得でき次第 config 化して表示）
+const works = [
+  {
+    name: '大濱畳店 様',
+    img: '/assets/images/works-ohama.png',
+    alt: '大濱畳店様 ホームページ制作実績',
+    url: null, // TODO: 公開URL確定後に設定
+    voice: null, // TODO: 掲載許可済みコメント取得後に設定
+  },
+  {
+    name: '中平個人タクシー 様',
+    img: '/assets/images/works-nakahira.png',
+    alt: '中平個人タクシー様 ホームページ制作実績',
+    url: null,
+    voice: null,
+  },
+];
 ---
 
 <Base>
-  <!-- 3-1. ファーストビュー -->
+  <!-- 1. ファーストビュー -->
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
@@ -21,76 +39,114 @@ const fmt = (d: Date) =>
         <p>{SITE.subcopy}</p>
         <div class="hero__cta">
           <a href={SITE.lineUrl} class="btn btn--line">LINEで無料相談してみる</a>
-          <a href="/contact/" class="btn btn--ghost">フォームはこちら</a>
+          <a href="#service" class="btn btn--ghost">どんなサービス？を見る</a>
         </div>
-        <p class="hero__note">※ 相談は無料。「何を聞けばいいかわからない」段階からどうぞ。</p>
+        <p class="hero__note">※ 相談は無料です。しつこい営業は一切しません。</p>
       </div>
-      <div class="hero__img">
-        <img src="/assets/images/hero.png" alt="長崎の中小企業のAI活用をサポートするまちのAI屋さん" width="1600" height="900" />
+      <div class="hero-card">
+        <img
+          src="/assets/images/profile.png"
+          alt="まちのAI屋さん 代表（長崎市でAI活用とホームページ制作の相談を受けています）"
+          width="316"
+          height="421"
+        />
+        <div class="hero-card__caption">
+          <strong>まちのAI屋さん 代表</strong>
+          <span>長崎市</span>
+        </div>
+        <p class="hero-card__word">「AIのこと、お気軽にどうぞ」</p>
       </div>
     </div>
   </section>
 
-  <!-- 3-2. こんなお悩みありませんか -->
+  <!-- 2. こんなお悩みありませんか（共感ファースト） -->
   <section class="section">
     <div class="container">
       <div class="section-title">
-        <span class="section-title__sub">POINT</span>
+        <span class="section-title__sub">お悩み</span>
         <h2>こんなお悩み、ありませんか？</h2>
       </div>
       <div class="points">
         <div class="point-card">
           <img src="/assets/images/point-1.png" alt="" width="600" height="600" loading="lazy" />
-          <span class="point-card__label">POINT 1</span>
+          <span class="point-card__label">その1</span>
           <p class="point-card__q">AIって、何から始めればいいの？</p>
           <p class="point-card__a">
-            まずは補助金を使ったセミナーで、あなたの業務に直結する使い方から始めましょう。専門用語は使いません。
+            わからなくて当たり前です。ご相談に来る方のほとんどが、同じ状態からのスタート。あなたの仕事のどこでAIが使えるか、一緒に探すところからお手伝いします。
           </p>
         </div>
         <div class="point-card">
           <img src="/assets/images/point-2.png" alt="" width="600" height="600" loading="lazy" />
-          <span class="point-card__label">POINT 2</span>
+          <span class="point-card__label">その2</span>
           <p class="point-card__q">うちみたいな小さな会社でも意味ある？</p>
           <p class="point-card__a">
-            小さい会社ほど効果が大きいのがAIです。1人で何役もこなしている仕事こそ、AIの出番です。
+            実は、小さい会社ほど効果が大きいのがAIです。1人で何役もこなしている仕事こそ、AIの出番です。
           </p>
         </div>
         <div class="point-card">
           <img src="/assets/images/point-3.png" alt="" width="600" height="600" loading="lazy" />
-          <span class="point-card__label">POINT 3</span>
-          <p class="point-card__q">導入したあと、続けられるか不安…</p>
+          <span class="point-card__label">その3</span>
+          <p class="point-card__q">パソコンも得意じゃないのに、大丈夫？</p>
           <p class="point-card__a">
-            月額のAI顧問サービスで「いつでも聞ける相談相手」になります。導入して終わり、にはしません。
+            大丈夫です。スマホが使えれば十分。同じことを何度聞いてもらっても構いません。あなたのペースで、ひとつずつ進めます。
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3-3. 3つのサービス -->
-  <section class="section section--soft" id="service">
+  <!-- 3. ごあいさつ（顔=安心を先に見せる） -->
+  <section class="section section--soft">
     <div class="container">
       <div class="section-title">
-        <span class="section-title__sub">SERVICE</span>
+        <span class="section-title__sub">ごあいさつ</span>
+        <h2>こんな者がやっています</h2>
+      </div>
+      <div class="profile">
+        <div class="profile__photo">
+          <img src="/assets/images/profile.png" alt={`${SITE.name} 代表`} width="316" height="421" loading="lazy" />
+        </div>
+        <div class="profile__body">
+          {SITE.owner && <h3>{SITE.owner}</h3>}
+          <p class="profile__role">まちのAI屋さん 代表｜{SITE.area}</p>
+          <p>
+            はじめまして。「まちのAI屋さん」は、昔の「まちの電器屋さん」のように、困ったときに気軽に声をかけられるAIの相談相手でありたい、という思いで始めました。
+          </p>
+          <p>
+            AIの話は、むずかしい言葉を使わなくても伝えられます。長崎の会社の現場に合わせて、わかることばでご説明します。
+          </p>
+          <p>
+            <a href="/about/">くわしいプロフィールはこちら →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 3つのサービス -->
+  <section class="section" id="service">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-title__sub">できること</span>
         <h2>3つのサービス</h2>
       </div>
       <div class="services">
         <div class="service-card">
           <img src="/assets/images/service-seminar.png" alt="" width="400" height="400" loading="lazy" />
-          <h3>AIセミナー × 補助金活用</h3>
+          <h3>AIセミナー</h3>
           <p>
-            長崎県のデジタル力向上補助金を活用した、実質負担の少ないAI研修。対面・ワークショップ形式で、翌日から使える内容だけをお届けします。
+            対面・ワークショップ形式で、翌日から使える内容だけをお届けするAI研修。長崎県の補助金が使える場合は、申請書類の作成まで一緒にやります。
           </p>
           <div class="service-card__link">
             <a href="/service/#seminar" class="btn btn--accent btn--sm">くわしく見る</a>
           </div>
         </div>
         <div class="service-card">
-          <span class="badge">準備中・先行受付</span>
+          <span class="badge badge--soon">2027年1月スタート予定</span>
           <img src="/assets/images/service-advisor.png" alt="" width="400" height="400" loading="lazy" />
           <h3>AI顧問（月額制）</h3>
           <p>
-            月額制でいつでも相談できる、AIの「かかりつけ相談相手」。2027年1月開始予定。先行のご相談を受け付けています。
+            月額制でいつでも相談できる、AIの「かかりつけ相談相手」。導入して終わり、にはしません。先行のご相談を受け付けています。
           </p>
           <div class="service-card__link">
             <a href="/service/#advisor" class="btn btn--accent btn--sm">くわしく見る</a>
@@ -110,40 +166,32 @@ const fmt = (d: Date) =>
     </div>
   </section>
 
-  <!-- 3-4. 制作実績・お客様の声 -->
-  <section class="section">
+  <!-- 5. 制作実績・お客様の声 -->
+  <section class="section section--soft">
     <div class="container">
       <div class="section-title">
-        <span class="section-title__sub">WORKS</span>
-        <h2>制作実績・お客様の声</h2>
+        <span class="section-title__sub">お手伝いした実績</span>
+        <h2>制作実績</h2>
       </div>
       <div class="works">
-        <div class="work-card">
-          <div class="work-card__frame">
-            <img src="/assets/images/works-ohama.png" alt="大濱畳店様 ホームページ" loading="lazy" />
-          </div>
-          <div class="work-card__body">
-            <h3>大濱畳店 様</h3>
-            <!-- TODO: 公開URL確定後にリンク先を設定 -->
-            <a href="#" target="_blank" rel="noopener">サイトを見る →</a>
-            <p class="work-card__voice">
-              <!-- TODO: 掲載許可済みの一言コメントに差し替え -->
-              「（お客様の一言コメントが入ります）」
-            </p>
-          </div>
-        </div>
-        <div class="work-card">
-          <div class="work-card__frame">
-            <img src="/assets/images/works-nakahira.png" alt="中平個人タクシー様 ホームページ" loading="lazy" />
-          </div>
-          <div class="work-card__body">
-            <h3>中平個人タクシー 様</h3>
-            <a href="#" target="_blank" rel="noopener">サイトを見る →</a>
-            <p class="work-card__voice">
-              「（お客様の一言コメントが入ります）」
-            </p>
-          </div>
-        </div>
+        {
+          works.map((w) => (
+            <div class="work-card">
+              <div class="work-card__frame">
+                <img src={w.img} alt={w.alt} loading="lazy" />
+              </div>
+              <div class="work-card__body">
+                <h3>{w.name}</h3>
+                {w.url && (
+                  <a href={w.url} target="_blank" rel="noopener">
+                    サイトを見る →
+                  </a>
+                )}
+                {w.voice && <p class="work-card__voice">「{w.voice}」</p>}
+              </div>
+            </div>
+          ))
+        }
       </div>
       <p class="text-center mt-32">
         <a href="/works/" class="btn btn--ghost btn--sm">実績一覧を見る</a>
@@ -151,23 +199,23 @@ const fmt = (d: Date) =>
     </div>
   </section>
 
-  <!-- 3-5. 料金の目安 -->
-  <section class="section section--soft">
+  <!-- 6. 料金の目安 -->
+  <section class="section">
     <div class="container">
       <div class="section-title">
-        <span class="section-title__sub">PRICE</span>
+        <span class="section-title__sub">料金</span>
         <h2>料金の目安</h2>
       </div>
       <div class="prices">
         <div class="price-card">
           <h3>AIセミナー</h3>
-          <p class="price-card__price">補助金活用で<br />実質負担を軽減<small>※要お見積り</small></p>
-          <p>長崎県デジタル力向上補助金の申請サポート込み</p>
+          <p class="price-card__price">内容に合わせて<br />お見積り</p>
+          <p>補助金が使える場合は、実質負担を大きく抑えられます。使えるかどうかの確認から無料でお手伝いします</p>
         </div>
         <div class="price-card">
           <h3>AI顧問（月額制）</h3>
-          <p class="price-card__price">2027年1月<br />開始予定</p>
-          <p>先行のご相談・お問い合わせを受付中です</p>
+          <p class="price-card__price">2027年1月<br />スタート予定</p>
+          <p>先行のご相談・優先案内のご希望を受付中です</p>
         </div>
         <div class="price-card">
           <h3>Web制作・保守</h3>
@@ -181,42 +229,40 @@ const fmt = (d: Date) =>
     </div>
   </section>
 
-  <!-- 3-6. 代表あいさつ -->
-  <section class="section">
+  <!-- 7. 相談の流れ（行動障壁の解消） -->
+  <section class="section section--soft">
     <div class="container">
       <div class="section-title">
-        <span class="section-title__sub">GREETING</span>
-        <h2>代表あいさつ</h2>
+        <span class="section-title__sub">ご相談の流れ</span>
+        <h2>相談って、何をするの？</h2>
       </div>
-      <div class="profile">
-        <div class="profile__photo">
-          <!-- TODO: 代表の実写写真に差し替え（3:4 縦構図推奨） -->
-          <img src="/assets/images/profile.png" alt={`${SITE.name} 代表`} width="600" height="800" loading="lazy" />
+      <div class="flow">
+        <div class="flow-card">
+          <span class="flow-card__num">1</span>
+          <h3>LINEでひとこと</h3>
+          <p>「AIのこと聞きたい」と送るだけで始まります。かしこまった文章はいりません。</p>
         </div>
-        <div class="profile__body">
-          <h3>{SITE.owner}</h3>
-          <p class="profile__role">まちのAI屋さん 代表｜{SITE.area}</p>
-          <p>
-            はじめまして。「まちのAI屋さん」は、昔の「まちの電器屋さん」のように、困ったときに気軽に声をかけられるAIの相談相手でありたい、という思いで始めました。
-          </p>
-          <p>
-            AIの話は、むずかしい言葉を使わなくても伝えられます。長崎の会社の現場に合わせて、まちのことばでご説明します。
-          </p>
-          <p>
-            <a href="/about/">くわしいプロフィールはこちら →</a>
-          </p>
+        <div class="flow-card">
+          <span class="flow-card__num">2</span>
+          <h3>雑談レベルでお話</h3>
+          <p>今のお仕事の様子を聞かせてください。売り込みはしません。</p>
+        </div>
+        <div class="flow-card">
+          <span class="flow-card__num">3</span>
+          <h3>合わなければ、それっきりでOK</h3>
+          <p>無理なおすすめは一切しません。「聞くだけ」で終わって大丈夫です。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3-7. お知らせ・コラム -->
+  <!-- 8. コラム -->
   {
     posts.length > 0 && (
-      <section class="section section--soft">
+      <section class="section">
         <div class="container">
           <div class="section-title">
-            <span class="section-title__sub">COLUMN</span>
+            <span class="section-title__sub">読みもの</span>
             <h2>コラム・お知らせ</h2>
           </div>
           <div class="blog-list">
@@ -237,6 +283,6 @@ const fmt = (d: Date) =>
     )
   }
 
-  <!-- 3-8. 締めCTA -->
+  <!-- 9. 締めCTA -->
   <CtaSection />
 </Base>

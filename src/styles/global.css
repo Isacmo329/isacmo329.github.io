@@ -264,12 +264,58 @@ a {
   border-radius: var(--radius);
 }
 
+/* FV 代表写真カード */
+.hero-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 20px 18px;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  transform: rotate(1.5deg);
+}
+
+.hero-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.hero-card__caption {
+  margin-top: 12px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-card__caption strong {
+  font-size: 15px;
+}
+
+.hero-card__caption span {
+  font-size: 12px;
+  color: var(--text-weak);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 10px;
+}
+
+.hero-card__word {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--accent-dark);
+}
+
 @media (max-width: 800px) {
   .hero__inner {
     grid-template-columns: 1fr;
   }
-  .hero__img {
+  .hero-card {
     order: -1;
+    max-width: 220px;
   }
 }
 
@@ -373,6 +419,10 @@ a {
   font-weight: 700;
   padding: 3px 14px;
   border-radius: 999px;
+}
+
+.service-card .badge--soon {
+  background: var(--accent);
 }
 
 .service-card__link {
@@ -670,6 +720,54 @@ a {
 .article-body pre code {
   background: none;
   padding: 0;
+}
+
+/* ---------- 相談の流れ ---------- */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.flow-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.flow-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.flow-card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.flow-card p {
+  font-size: 14px;
+  color: var(--text-weak);
+  text-align: left;
+}
+
+@media (max-width: 800px) {
+  .flow {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- CTAセクション ---------- */
